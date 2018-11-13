@@ -1,0 +1,49 @@
+git config [--global] user.name [user_name]
+git config [--global] user.email [user_email]
+git config --list
+git remote -v
+git remote set-url origin [new_url]
+
+Pull operations:
+------------------
+1.) Create a folder in your local machine.
+2.) git init
+3.) git remote add origin [repo_url]
+4.) git config --global http.sslVerify false
+5.) git pull origin master  // after you have added some files in your repo
+
+Pushing operations:
+------------------
+Add some files in your local folder/Make changes
+1.) git status // To see untracked files
+2.) git add -A // add untracked files to staging area
+3.) git reset [file_name] // move files back to working area if you moved it added it before by mistake.
+4.) git commit -m "detailed description of commit"
+5.) git push -u origin master // to push files from staging to commit area.
+6.) git rm -r [file-name.txt] //Remove a file (or folder)
+
+Branching Operations:
+---------------------
+
+1.) git checkout master     // Change to master
+2.) git checkout -b [branch_name] master  // Creating and changing to branch
+3.) git checkout [branch_name]    // Change to branch
+4.) git branch -d [branch_name]  // Delete the branch from local file system. First change to some other branch from the branch you want to delete.
+5.) git branch -m [old_branch_name] [new_branch_name] // Rename the branch
+6.) git push origin :[branch_name] // To remove branch from repo.
+
+Pushing new changes to branch:
+-------------------------------
+1.) git status // All the untracked files will be shown in red.
+2.) git add -A // Adds the untracked files to staging area.
+3.) git commit -m "message" // commits the changes
+4.) git push -u origin [branch_name] // To push the branch into repo
+
+Merging your branch with master branch:
+---------------------------------------
+1.) git checked master // Change to master branch
+2.) git pull origin master // To pull files from master
+3.) git branch --merged // To check which branches have been merged in past
+4.) git merge [branch_name] //To merge the branch with master
+
+
