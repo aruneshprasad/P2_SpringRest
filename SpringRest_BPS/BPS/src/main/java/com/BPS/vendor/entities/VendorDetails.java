@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "vendordetails", uniqueConstraints=@UniqueConstraint(columnNames="vendor_id"), schema="vendor")
+@Table(name = "vendordetails", uniqueConstraints=@UniqueConstraint(columnNames="vendor_id"))
 public class VendorDetails {
 
     @Id

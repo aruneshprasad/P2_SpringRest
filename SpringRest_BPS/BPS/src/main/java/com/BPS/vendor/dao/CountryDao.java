@@ -12,5 +12,8 @@ public interface CountryDao extends JpaRepository<Country, String>{
 	
 	@Query(value="select * from country c where c.country = :cParam", nativeQuery=true)
 	List<Country> findByCountryName(@Param("cParam") String country);
+	
+	@Query(value="select * from country c where c.country = :cParam and c.state = :cState", nativeQuery=true)
+	List<Country> findCountryId(@Param("cParam") String country, @Param("cState") String state);
 
 }

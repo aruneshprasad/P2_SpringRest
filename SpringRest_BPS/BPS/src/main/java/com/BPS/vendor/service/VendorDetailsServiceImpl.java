@@ -1,5 +1,6 @@
 package com.BPS.vendor.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,16 @@ public class VendorDetailsServiceImpl implements VendorDetailsService{
 	@Override
 	@Transactional
 	public VendorDetails addVendor(VendorDetails vendor) {
-		vendor.setVendorId(generateVendorId());
+		
+		int now = LocalDate.now().getYear();
+		int yos = now-vendor.getYearOfEstablishment();
+		if((yos>=0 && yos<5)) vendor.setCertificate("A+");
+		else if ((yos>=5 && yos<10)) vendor.setCertificate("B+");
+		else if ((yos>=10 && yos<15)) vendor.setCertificate("C+");
+		else if ((yos>=15 && yos<25)) vendor.setCertificate("D+");
+		else if ((yos>=25 && yos<50)) vendor.setCertificate("E+");
+		else if ((yos>=50)) vendor.setCertificate("F+");
+		
 		return dao.save(vendor);
 	}
 	
@@ -34,22 +44,14 @@ public class VendorDetailsServiceImpl implements VendorDetailsService{
 		return dao.findById(vendorId);
 	}
 	
-	public String generateVendorId(){
-		StringBuilder prefix= new StringBuilder("V");
-		List<VendorDetails> vendors = dao.findByOrderByVendorIdDesc();
-		if(!vendors.isEmpty()){
-			Integer id = new Integer(vendors.get(0).getVendorId().substring(1));
-			id++;
-			for(int i=id.toString().length();i<=3;i++)
-				prefix.append("0");
-			prefix.append(id);
-		}
-		else{
-			prefix.append("0001");
-		}
-		return prefix.toString();
+	
+	@Override
+	public List<VendorDetails> findVendorByType(String vendorType) {
+		return dao.findVendorByType(vendorType);
 	}
 
-	
-
+	@Override
+	public List<VendorDetails> findByOrderByVendorIdDesc() {
+		return dao.findByOrderByVendorIdDesc();
+	}
 }

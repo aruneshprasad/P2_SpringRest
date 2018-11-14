@@ -25,6 +25,10 @@ public class CustomerDetails {
 	private String customerName;
 	
 	@Basic
+	@Column(name="vendor_name")
+	private String vendorName;
+	
+	@Basic
 	private String address;
 	
 	@Basic

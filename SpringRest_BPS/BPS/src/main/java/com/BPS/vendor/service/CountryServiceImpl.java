@@ -17,6 +17,11 @@ public class CountryServiceImpl implements CountryService{
 
 	@Override
 	@Transactional
+	public List<Country> findCountryId(String country, String state) {
+		return cd.findCountryId(country, state);
+	}
+
+	@Override
 	public List<Country> findByCountryName(String country) {
 		return cd.findByCountryName(country);
 	}

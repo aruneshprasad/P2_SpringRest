@@ -10,5 +10,7 @@ public interface VendorDetailsService {
 	public List<VendorDetails> findAll();
 	public VendorDetails addVendor(VendorDetails vendor);
 	public Optional<VendorDetails> findById(String vendorId);
+	public List<VendorDetails> findVendorByType(String vendorType);
+	public List<VendorDetails> findByOrderByVendorIdDesc();
 
 }
