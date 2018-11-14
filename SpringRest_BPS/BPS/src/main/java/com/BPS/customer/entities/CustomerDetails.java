@@ -25,6 +25,10 @@ public class CustomerDetails {
 	private String customerName;
 	
 	@Basic
+	@Column(name="vendor_name")
+	private String vendorName;
+	
+	@Basic
 	private String address;
 	
 	@Basic
@@ -59,6 +63,14 @@ public class CustomerDetails {
 	@ManyToOne
 	private Country country;
 	
+	public String getVendorName() {
+		return vendorName;
+	}
+
+	public void setVendorName(String vendorName) {
+		this.vendorName = vendorName;
+	}
+
 	public Card getCard() {
 		return card;
 	}

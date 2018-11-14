@@ -1,6 +1,7 @@
 package com.BPS.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,13 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.BPS.bill.entities.BillDetails;
+import com.BPS.bill.entities.BillSaveHolder;
 import com.BPS.bill.service.BillDetailsService;
+import com.BPS.customer.entities.CustomerDetails;
 
 @RestController
 @CrossOrigin
@@ -25,6 +29,7 @@ public class BillController {
 	
 	@Autowired
 	private BillDetailsService bs;
+	
 	List<BillDetails> bills = null;
 	
 	@GetMapping(value = "/bills")
@@ -37,8 +42,12 @@ public class BillController {
 	}
 	
 	@PostMapping(value = "/generate/")
-	public ResponseEntity<?> generateBill(@RequestBody BillDetails bill) {
-		bill = bs.addBill(bill);
+	public ResponseEntity<?> generateBill(@RequestBody BillSaveHolder bsh) {
+		
+		BillDetails bill = new BillDetails();
+		
+		bill.setCustId(bsh.getCustomerId());
+		//bill.setVendorId(bsh.getv);
 		
 		if(bill==null) {
 			return new ResponseEntity<String>("Bill not saved", HttpStatus.OK);

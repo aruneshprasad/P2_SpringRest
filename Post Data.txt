@@ -1,0 +1,34 @@
+#------------------ Vendor Save Details -------------------#
+{
+        "vendorName": "XYZ",
+        "companyRegNo": "789",
+        "vendorType": "Water",
+        "address": "chn",
+        "country": "USA",
+        "state": "NY",
+        "email": "XYZ@gmail.com",
+        "contact": "879",
+        "website": "A@gmail.com",
+        "certIssueDate": "2018-11-13",
+        "certValidityDate": "2018-11-13",
+        "empCount": 96,
+        "custCount": 22,
+        "yearOfEstablishment": 2008
+}
+
+#------------------ Customer Save Details -------------------#
+{
+    "customerName": "Raj",
+    "address": "Bangalore",
+    "contactNumber": "789654",
+    "country": "USA",
+    "state": "NY",
+    "email": "a@gmail.com",
+    "idDocType": "PAN",
+    "docNo": "PAN456",
+    "regDate": "2018-11-14",
+    "vendorType": "Water",
+    "vendorName": "ABC",
+    "cardNo": "1111-1111",
+    "balance": 78965
+}

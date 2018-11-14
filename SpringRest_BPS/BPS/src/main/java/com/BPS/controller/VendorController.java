@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ import com.BPS.vendor.entities.Country;
 import com.BPS.vendor.entities.VendorDetails;
 import com.BPS.vendor.entities.VendorSaveHolder;
 import com.BPS.vendor.entities.VendorUpdateHolder;
-import com.BPS.vendor.service.AmountService;
-import com.BPS.vendor.service.CountryService;
+import com.BPS.vendor.service.VendorAmountService;
+import com.BPS.vendor.service.VendorCountryService;
 import com.BPS.vendor.service.VendorDetailsService;
 
 @RestController
@@ -34,9 +35,9 @@ public class VendorController {
 	@Autowired
 	private VendorDetailsService vds;
 	@Autowired
-	private CountryService cs;
+	private VendorCountryService cs;
 	@Autowired
-	private AmountService as;
+	private VendorAmountService as;
 	
 	List<VendorDetails> vendors = null;
 	List<Country> countries = null;
@@ -59,7 +60,7 @@ public class VendorController {
 		vendor = vds.findById(vendorId);
 		
 		if(!vendor.isPresent()) {
-			return new ResponseEntity<String>("Vendor with given id "+vendorId+"  not found.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("Vendor with given id "+vendorId+" not found.", HttpStatus.NOT_FOUND);
 		}
 		
 		return new ResponseEntity<Optional<VendorDetails>> (vendor, HttpStatus.OK);
@@ -80,7 +81,7 @@ public class VendorController {
 	public ResponseEntity<?> saveVendor(@RequestBody VendorSaveHolder vsh) {
 		
 		VendorDetails vendor = new VendorDetails();
-		System.out.println(vsh.getAddress());
+		
 		vendor.setAddress(vsh.getAddress());
 		vendor.setCertIssueDate(vsh.getCertIssueDate());
 		vendor.setCertValidityDate(vsh.getCertValidityDate());
@@ -95,7 +96,7 @@ public class VendorController {
 		
 		Amount amount = new Amount();
 		List<Amount> vendorAmount = as.findByVendorType(vsh.getVendorType());
-		amount.setVendorType(vsh.getVendorType());
+		amount.setVendorType(vendorAmount.get(0).getVendorType());
 		amount.setAmount(vendorAmount.get(0).getAmount());
 		vendor.setAmount(amount);
 		
@@ -129,7 +130,7 @@ public class VendorController {
 		return new ResponseEntity<VendorDetails>(vendor, HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/updatevendor/")
+	@PutMapping(value = "/updatevendor/")
 	public ResponseEntity<?> updateVendor(@RequestBody VendorUpdateHolder vuh) {
 		
 		VendorDetails vendor = new VendorDetails();
