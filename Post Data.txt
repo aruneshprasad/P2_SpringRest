@@ -32,3 +32,29 @@
     "cardNo": "1111-1111",
     "balance": 78965
 }
+
+#------------------ Bill Save Details -------------------#
+{
+        
+	"customerId": "C0001",
+        
+	"vendorType": "Water",
+        
+	"vendorName": "ABC",
+        
+	"pendingAmount": 2000,
+        
+	"paymentDate": "2018-11-12",
+        
+	"amountToPay": 2000
+
+}
+
+
+
+
+
+
+
+
+

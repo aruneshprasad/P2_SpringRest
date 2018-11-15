@@ -1,8 +1,6 @@
 package com.BPS.controller;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
@@ -42,7 +40,7 @@ public class VendorController {
 	List<VendorDetails> vendors = null;
 	List<Country> countries = null;
 	List<Amount> amounts = null;
-	Optional<VendorDetails> vendor = null;
+	List<VendorDetails> vendor = null;
 	
 	@GetMapping(value = "/vendors")
 	public ResponseEntity<?> findAllVendors() {
@@ -57,17 +55,20 @@ public class VendorController {
 	
 	@GetMapping("/getvendor/{vendorId}")
 	public ResponseEntity<?> findVendorById(@PathVariable("vendorId") String vendorId){
-		vendor = vds.findById(vendorId);
 		
-		if(!vendor.isPresent()) {
+		vendor = vds.findVendorById(vendorId);
+		
+		if(vendor.isEmpty()) {
 			return new ResponseEntity<String>("Vendor with given id "+vendorId+" not found.", HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<Optional<VendorDetails>> (vendor, HttpStatus.OK);
+		return new ResponseEntity<List<VendorDetails>> (vendor, HttpStatus.OK);
 	}
 	
 	@GetMapping("/getvendors/{vendorType}")
 	public ResponseEntity<?> findVendorByType(@PathVariable("vendorType") String vendorType){
+		
+		
 		vendors = vds.findVendorByType(vendorType);
 		
 		if(vendors.isEmpty()) {

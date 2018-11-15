@@ -2,8 +2,6 @@ package com.BPS.vendor.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,18 +38,26 @@ public class VendorDetailsServiceImpl implements VendorDetailsService{
 	}
 	
 	@Override
-	public Optional<VendorDetails> findById(String vendorId) {
-		return dao.findById(vendorId);
+	@Transactional
+	public List<VendorDetails> findVendorById(String vendorId) {
+		return dao.findVendorById(vendorId);
 	}
 	
 	
 	@Override
+	@Transactional
 	public List<VendorDetails> findVendorByType(String vendorType) {
 		return dao.findVendorByType(vendorType);
 	}
 
 	@Override
+	@Transactional
 	public List<VendorDetails> findByOrderByVendorIdDesc() {
 		return dao.findByOrderByVendorIdDesc();
+	}
+
+	@Override
+	public List<VendorDetails> findVendorIdByNameType(String vendorName, String vendorType) {
+		return dao.findVendorIdByNameType(vendorName, vendorType);
 	}
 }

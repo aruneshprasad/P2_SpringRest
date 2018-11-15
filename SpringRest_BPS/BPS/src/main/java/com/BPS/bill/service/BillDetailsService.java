@@ -8,5 +8,7 @@ public interface BillDetailsService {
 	
 	List<BillDetails> findAll();
 	public BillDetails addBill(BillDetails bill);
+	
+	public List<BillDetails> findByOrderByBillIdDesc();
 
 }

@@ -1,5 +1,6 @@
 package bps.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -13,14 +14,14 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "vendordetails", uniqueConstraints=@UniqueConstraint(columnNames="vendor_id"))
-public class VendorDetails {
+@Table(name = "vendordetails", uniqueConstraints={@UniqueConstraint(columnNames="vendor_id"), @UniqueConstraint(columnNames="vendor_name")})
+public class VendorDetails implements Serializable{
 
     @Id
     @Column(unique = true, name="vendor_id")
     private String vendorId;
 
-    @Basic
+    @Id
     @Column(name="vendor_name")
     private String vendorName;
 

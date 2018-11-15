@@ -25,24 +25,12 @@ public class BillDetailsServiceImpl implements BillDetailsService{
 	@Override
 	@Transactional
 	public BillDetails addBill(BillDetails bill) {
-		bill.setBillId(generateBillId());
 		return dao.save(bill);
 	}
-	
-	public String generateBillId(){
-		StringBuilder prefix= new StringBuilder("B");
-		List<BillDetails> bills = dao.findByOrderByBillIdDesc();
-		if(!bills.isEmpty()){
-			Integer id = new Integer(bills.get(0).getBillId().substring(1));
-			id++;
-			for(int i=id.toString().length();i<=3;i++)
-				prefix.append("0");
-			prefix.append(id);
-		}
-		else{
-			prefix.append("0001");
-		}
-		return prefix.toString();
+
+	@Override
+	public List<BillDetails> findByOrderByBillIdDesc() {
+		return dao.findByOrderByBillIdDesc();
 	}
 
 }

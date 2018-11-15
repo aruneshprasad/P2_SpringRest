@@ -6,21 +6,22 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "vendordetails", uniqueConstraints=@UniqueConstraint(columnNames="vendor_id"))
-public class VendorDetails {
+@IdClass(VendorPrimaryKeys.class)
+@Table(name = "vendordetails")
+public class VendorDetails{
 
-    @Id
-    @Column(unique = true, name="vendor_id")
+	@Id
+    @Column(name="vendor_id")
     private String vendorId;
 
-    @Basic
+    @Id
     @Column(name="vendor_name")
     private String vendorName;
 
