@@ -59,10 +59,10 @@ public class VendorController {
 		vendor = vds.findVendorById(vendorId);
 		
 		if(vendor.isEmpty()) {
-			return new ResponseEntity<String>("Vendor with given id "+vendorId+" not found.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<VendorDetails>(new VendorDetails(), HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<List<VendorDetails>> (vendor, HttpStatus.OK);
+		return new ResponseEntity<VendorDetails> (vendor.get(0), HttpStatus.OK);
 	}
 	
 	@GetMapping("/getvendors/{vendorType}")
@@ -133,6 +133,8 @@ public class VendorController {
 	
 	@PutMapping(value = "/updatevendor/")
 	public ResponseEntity<?> updateVendor(@RequestBody VendorUpdateHolder vuh) {
+		
+		System.out.println();
 		
 		VendorDetails vendor = new VendorDetails();
 		

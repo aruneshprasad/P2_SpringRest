@@ -1,5 +1,7 @@
 package com.BPS.customer.entities;
 
+import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +23,7 @@ public class Card {
 	
 	@Basic
 	@Column(name="card_validity")
-	private String cardValidity;
+	private Date cardValidity;
 	
 	public String getCardNo() {
 		return cardNo;
@@ -38,13 +40,15 @@ public class Card {
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
 	}
-	
-	public String getCardValidity() {
+
+	public Date getCardValidity() {
 		return cardValidity;
 	}
-	
-	public void setCardValidity(String cardValidity) {
+
+	public void setCardValidity(Date cardValidity) {
 		this.cardValidity = cardValidity;
 	}
+	
+	
 	
 }

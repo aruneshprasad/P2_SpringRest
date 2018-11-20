@@ -1,6 +1,8 @@
 package com.BPS.controller;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,7 @@ public class BillController {
 	private VendorDetailsService vds;
 	
 	List<BillDetails> bills = null;
+	Optional<List<BillDetails>> bill = null;
 	
 	@GetMapping(value = "/bills")
 	public ResponseEntity<?> findAll() {
@@ -41,6 +45,30 @@ public class BillController {
 		return new ResponseEntity<List<BillDetails>>(bills, HttpStatus.OK);
 	}
 	
+	/*@GetMapping("/getbill/{billId}")
+	public ResponseEntity<?> findBillById(@PathVariable("billId") String billId){
+		
+		bill = bs.findById(billId);
+		
+		if(!bill.isPresent()) {
+			return new ResponseEntity<String>("Bill with given id "+billId+" not found.", HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<Optional<BillDetails>> (bill, HttpStatus.OK);
+	}*/
+	
+	@GetMapping("/getbilldetails/{customerId}")
+	public ResponseEntity<?> findBillByCustomerId(@PathVariable("customerId") String customerId){
+		
+		bill = bs.findBillByCustomerId(customerId);
+		
+		/*if(!bill.isPresent()) {
+			return new ResponseEntity<String>("Bill with given id "+customerId+" not found.", HttpStatus.NOT_FOUND);
+		}*/
+		
+		return new ResponseEntity<Optional<List<BillDetails>>> (bill, HttpStatus.OK);
+	}
+	
 	@PostMapping(value = "/generate/")
 	public ResponseEntity<?> generateBill(@RequestBody BillSaveHolder bsh) {
 		
@@ -48,6 +76,7 @@ public class BillController {
 		
 		bill.setCustId(bsh.getCustomerId());
 		bill.setPaymentDate(bsh.getPaymentDate());
+		bill.setAmountToPay(bsh.getAmountToPay());
 		bill.setDueAmount(bsh.getPendingAmount()-bsh.getAmountToPay());
 		
 		List<VendorDetails> vendor = vds.findVendorIdByNameType(bsh.getVendorName(), bsh.getVendorType());

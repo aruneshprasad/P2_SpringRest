@@ -64,7 +64,7 @@ public class CustomerController {
 		customer = cds.findById(customerId);
 		
 		if(!customer.isPresent()) {
-			return new ResponseEntity<String>("Customer with given id "+customerId+" not found.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<CustomerDetails>(new CustomerDetails(), HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<Optional<CustomerDetails>> (customer, HttpStatus.OK);
@@ -99,10 +99,11 @@ public class CustomerController {
 		customer.setCountry(country);
 		
 		Card card = new Card();
-		List<Card> cardDetails = cards.findByCardNo(csh.getCardNo());
-		card.setCardNo(cardDetails.get(0).getCardNo());
-		card.setCardType(cardDetails.get(0).getCardType());
-		card.setCardValidity(cardDetails.get(0).getCardValidity());
+		//List<Card> cardDetails = cards.findByCardNo(csh.getCardNo());
+		card.setCardNo(csh.getCardNo());
+		card.setCardType(csh.getCardType());
+		card.setCardValidity(csh.getCardValidity());
+		cards.addCard(card);
 		customer.setCard(card);
 		
 		StringBuilder prefix= new StringBuilder("C");
@@ -158,10 +159,11 @@ public class CustomerController {
 		customer.setCountry(country);
 		
 		Card card = new Card();
-		List<Card> cardDetails = cards.findByCardNo(cuh.getCardNo());
-		card.setCardNo(cardDetails.get(0).getCardNo());
-		card.setCardType(cardDetails.get(0).getCardType());
-		card.setCardValidity(cardDetails.get(0).getCardValidity());
+		//List<Card> cardDetails = cards.findByCardNo(cuh.getCardNo());
+		card.setCardNo(cuh.getCardNo());
+		card.setCardType(cuh.getCardType());
+		card.setCardValidity(cuh.getCardValidity());
+		cards.addCard(card);
 		customer.setCard(card);
 		
 		customer = cds.addCustomer(customer);

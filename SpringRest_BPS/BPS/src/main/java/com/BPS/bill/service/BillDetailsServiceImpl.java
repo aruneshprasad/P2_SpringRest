@@ -1,7 +1,7 @@
 package com.BPS.bill.service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +29,21 @@ public class BillDetailsServiceImpl implements BillDetailsService{
 	}
 
 	@Override
+	@Transactional
 	public List<BillDetails> findByOrderByBillIdDesc() {
 		return dao.findByOrderByBillIdDesc();
+	}
+
+	@Override
+	@Transactional
+	public Optional<BillDetails> findById(String billId) {
+		return dao.findById(billId);
+	}
+
+	@Override
+	@Transactional
+	public Optional<List<BillDetails>> findBillByCustomerId(String customerId) {
+		return dao.findBillByCustomerId(customerId);
 	}
 
 }

@@ -18,8 +18,23 @@ public class CustomerUpdateHolder {
 	private String vendorType;
 	private String vendorName;
 	private String cardNo;
+	private String cardType;
+	private Date cardValidity;
 	private Double balance;
 	
+	
+	public String getCardType() {
+		return cardType;
+	}
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
+	public Date getCardValidity() {
+		return cardValidity;
+	}
+	public void setCardValidity(Date cardValidity) {
+		this.cardValidity = cardValidity;
+	}
 	public String getCustomerId() {
 		return customerId;
 	}

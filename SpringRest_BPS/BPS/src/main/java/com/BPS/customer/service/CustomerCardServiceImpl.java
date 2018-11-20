@@ -21,4 +21,9 @@ public class CustomerCardServiceImpl implements CustomerCardService{
 		return dao.findByCardNo(cardNo);
 	}
 
+	@Override
+	public Card addCard(Card card) {
+		return dao.save(card);
+	}
+
 }

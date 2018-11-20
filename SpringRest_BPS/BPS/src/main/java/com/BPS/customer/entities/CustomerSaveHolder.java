@@ -11,14 +11,29 @@ public class CustomerSaveHolder {
 	private String country;
 	private String state;
 	private String email;
-	private String IdDocType;
+	private String idDocType;
 	private String docNo;
 	private Date regDate;
 	private String vendorType;
 	private String vendorName;
 	private String cardNo;
+	private String cardType;
+	private Date cardValidity;
 	private Double balance;
 	
+	
+	public String getCardType() {
+		return cardType;
+	}
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
+	public Date getCardValidity() {
+		return cardValidity;
+	}
+	public void setCardValidity(Date cardValidity) {
+		this.cardValidity = cardValidity;
+	}
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -55,11 +70,12 @@ public class CustomerSaveHolder {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public String getIdDocType() {
-		return IdDocType;
+		return idDocType;
 	}
 	public void setIdDocType(String idDocType) {
-		IdDocType = idDocType;
+		this.idDocType = idDocType;
 	}
 	public String getDocNo() {
 		return docNo;

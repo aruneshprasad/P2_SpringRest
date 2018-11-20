@@ -30,6 +30,17 @@ public class BillDetails {
 	
 	@Column(name="due_amount")
 	private Long dueAmount;
+	
+	@Column(name="amount_to_pay")
+	private Long amountToPay;
+	
+	public Long getAmountToPay() {
+		return amountToPay;
+	}
+
+	public void setAmountToPay(Long amountToPay) {
+		this.amountToPay = amountToPay;
+	}
 
 	public String getBillId() {
 		return billId;

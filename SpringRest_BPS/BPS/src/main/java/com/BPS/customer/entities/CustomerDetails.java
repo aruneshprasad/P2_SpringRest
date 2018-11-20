@@ -40,7 +40,7 @@ public class CustomerDetails {
 	
 	@Basic
 	@Column(name="id_document_type")
-	private String IdDocType;
+	private String idDocType;
 	
 	@Basic
 	@Column(name="doc_no")
@@ -136,11 +136,11 @@ public class CustomerDetails {
 	}
 
 	public String getIdDocType() {
-		return IdDocType;
+		return idDocType;
 	}
 
 	public void setIdDocType(String idDocType) {
-		IdDocType = idDocType;
+		this.idDocType = idDocType;
 	}
 
 	public String getDocNo() {
