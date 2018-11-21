@@ -81,6 +81,12 @@ public class VendorController {
 	@PostMapping(value = "/registervendor/")
 	public ResponseEntity<?> saveVendor(@RequestBody VendorSaveHolder vsh) {
 		
+		vendor = vds.findVendorIdByNameType(vsh.getVendorName(), vsh.getVendorType());
+		
+		if(!vendor.isEmpty()){
+			return new ResponseEntity<VendorDetails>(new VendorDetails(), HttpStatus.OK);
+		}
+		
 		VendorDetails vendor = new VendorDetails();
 		
 		vendor.setAddress(vsh.getAddress());
@@ -125,9 +131,9 @@ public class VendorController {
 		
 		vendor = vds.addVendor(vendor);
 		
-		if(vendor==null){
+		/*if(vendor==null){
 			return new ResponseEntity<String>("Details could not be saved.", HttpStatus.EXPECTATION_FAILED);
-		}
+		}*/
 		return new ResponseEntity<VendorDetails>(vendor, HttpStatus.OK);
 	}
 	
